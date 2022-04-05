@@ -14,6 +14,22 @@ enum Digit
     EIGHT,
     NINE,
 };
+enum Operator
+{
+    PLUS,
+    MINUS,
+    TIMES,
+    DIVISION,
+    MODULE,
+    SQROOT,
+};
+enum Control{
+    CE,
+    OFF,
+    MRC,
+    MPLUS,
+    MMINUS,
+};
 
 class Display
 {
@@ -26,7 +42,7 @@ public:
             cout << "#####\n#   #\n#   #\n#   #\n#   #\n#   #\n#####";
             break;
         case ONE:
-            cout << "#####\n    #\n    #\n    #\n    #\n    #\n    #";
+            cout << "    #\n    #\n    #\n    #\n    #\n    #\n    #";
             break;
         case TWO:
             cout << "#####\n    #\n    #\n#####\n#    \n#    \n#####";
@@ -41,7 +57,7 @@ public:
             cout << "#####\n#    \n#    \n#####\n    #\n    #\n#####";
             break;
         case SIX:
-            cout << "#####\n    #\n    #\n#####\n#   #\n#   #\n#####";
+            cout << "#####\n#\n#\n#####\n#   #\n#   #\n#####";
             break;
         case SEVEN:
             cout << "#####\n    #\n    #\n    #\n    #\n    #\n    #";
@@ -59,18 +75,18 @@ public:
 
 class Key
 {
+    Keyboard *keyboard;
     Digit digito;
 
 public:
-    Keyboard *keyboard;
     Key(Digit d) : digito(d) {}
     void press()
     {
-        this->keyboard->receiveDigit(this->digito);
+        Key::keyboard->receiveDigit(this->digito);
     }
     void setKeyboard(Keyboard *keyboard)
     {
-        this->keyboard = keyboard;
+        Key::keyboard = keyboard;
     }
 };
 
@@ -84,7 +100,7 @@ public:
     void addKey(Key *key)
     {
         this->keys[this->KeysCount++] = key;
-        key->keyboard = this;
+        key->setKeyboard(this);
     }
 };
 
@@ -112,6 +128,6 @@ int main()
     Keyboard k1;
     Key key0(ZERO), key1(ONE);
 
-    k1.addKey(key0);
-    k1.addKey(key1);
+    k1.addKey(&key0);
+    k1.addKey(&key1);
 }
