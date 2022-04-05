@@ -1,48 +1,114 @@
+#include <iostream>
+using namespace std;
 
-enum Digit {ZERO, ONE, TWO,};
-
-class Display {
-    public:
-        void add(Digit digit){}
-        void clear(){}
+enum Digit
+{
+    ZERO,
+    ONE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    SEVEN,
+    EIGHT,
+    NINE,
 };
 
-class Key {
-        Keyboard* keyboard;
-        Digit digito;
-    public:
-        key(Digit d):digit(d){}
-        void press(){
-            this->keyboard->receiveDigit(this->digit);
+class Display
+{
+public:
+    void add(Digit digit)
+    {
+        switch (digit)
+        {
+        case ZERO:
+            cout << "#####\n#   #\n#   #\n#   #\n#   #\n#   #\n#####";
+            break;
+        case ONE:
+            cout << "#####\n    #\n    #\n    #\n    #\n    #\n    #";
+            break;
+        case TWO:
+            cout << "#####\n    #\n    #\n#####\n#    \n#    \n#####";
+            break;
+        case THREE:
+            cout << "#####\n    #\n    #\n#####\n    #\n    #\n#####";
+            break;
+        case FOUR:
+            cout << "#   #\n#   #\n#   #\n#####\n    #\n    #\n    #";
+            break;
+        case FIVE:
+            cout << "#####\n#    \n#    \n#####\n    #\n    #\n#####";
+            break;
+        case SIX:
+            cout << "#####\n    #\n    #\n#####\n#   #\n#   #\n#####";
+            break;
+        case SEVEN:
+            cout << "#####\n    #\n    #\n    #\n    #\n    #\n    #";
+            break;
+        case EIGHT:
+            cout << "#####\n#   #\n#   #\n#####\n#   #\n#   #\n#####";
+            break;
+        case NINE:
+            cout << "#####\n#   #\n#   #\n#####\n    #\n    #\n    #";
+            break;
         }
-        void setKeyboard(Keyboard* keyboard{
-            this->keyboard = keyboard;
-        })
+    }
+    void clear() {}
 };
 
-class Keyboard {
-    Key* keys[200];
+class Key
+{
+    Digit digito;
+
+public:
+    Keyboard *keyboard;
+    Key(Digit d) : digito(d) {}
+    void press()
+    {
+        this->keyboard->receiveDigit(this->digito);
+    }
+    void setKeyboard(Keyboard *keyboard)
+    {
+        this->keyboard = keyboard;
+    }
+};
+
+class Keyboard
+{
+    Key *keys[200];
     int KeysCount;
-    Cpu* cpu;
-    public:
-    void addKey(Key* key){
+    CPU *cpu;
+
+public:
+    void addKey(Key *key)
+    {
         this->keys[this->KeysCount++] = key;
         key->keyboard = this;
     }
-
 };
 
+class CPU
+{
+    Display *visor;
+    Digit digito;
 
-
-class CPU {
-
+public:
+    void soma(Digit) {}
+    void subtrai() {}
+    void divite() {}
+    void multiplica() {}
 };
 
-class Calculator {
-
+class Calculator
+{
+    Display *visor;
+    Keyboard *keyboard;
+    CPU *cpu;
 };
 
-int main(){
+int main()
+{
     Keyboard k1;
     Key key0(ZERO), key1(ONE);
 
