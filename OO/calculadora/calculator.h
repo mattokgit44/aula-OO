@@ -72,18 +72,27 @@ public:
     }
     void clear() {}
 };
-
+class KeyOperator : public Key{
+    Operator operador;
+};
+class KeyDigit : public Key{
+    Digit digit;
+};
+class KeyOperator : public Key{
+    Control controle;
+};
 class Key
 {
     Keyboard *keyboard;
-    Digit digito;
+    //Digit digito;
 
 public:
-    Key(Digit d) : digito(d) {}
-    void press()
-    {
-        Key::keyboard->receiveDigit(this->digito);
-    }
+    //Key(Digit d) : digito(d) {}
+    //void press()
+    //{
+    //    Key::keyboard->receiveDigit(this->digito);
+    //}
+    virtual void press() = 0;
     void setKeyboard(Keyboard *keyboard)
     {
         Key::keyboard = keyboard;
