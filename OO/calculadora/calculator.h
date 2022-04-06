@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 enum Digit
 {
     ZERO,
@@ -23,7 +22,8 @@ enum Operator
     MODULE,
     SQROOT,
 };
-enum Control{
+enum Control
+{
     CE,
     OFF,
     MRC,
@@ -72,27 +72,33 @@ public:
     }
     void clear() {}
 };
-class KeyOperator : public Key{
+class KeyOperator : public Key
+{
     Operator operador;
 };
-class KeyDigit : public Key{
+class KeyDigit : public Key
+{
     Digit digit;
 };
-class KeyOperator : public Key{
+class KeyOperator : public Key
+{
     Control controle;
 };
 class Key
 {
     Keyboard *keyboard;
-    //Digit digito;
+    Digit digito;
 
 public:
-    //Key(Digit d) : digito(d) {}
-    //void press()
+    Key(Digit d) : digito(d) {}
+    // void press()
     //{
-    //    Key::keyboard->receiveDigit(this->digito);
-    //}
-    virtual void press() = 0;
+    //     Key::keyboard->receiveDigit(this->digito);
+    // }
+    virtual void press() //= 0;
+    {
+        Key::keyboard->receiveDigit(this->digito);
+    }
     void setKeyboard(Keyboard *keyboard)
     {
         Key::keyboard = keyboard;
