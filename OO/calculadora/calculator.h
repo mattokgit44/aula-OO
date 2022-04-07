@@ -11,98 +11,62 @@ enum Digit
     SIX,
     SEVEN,
     EIGHT,
-    NINE,
+    NINE
 };
 enum Operator
 {
-    PLUS,
-    MINUS,
-    TIMES,
+    SUM,
+    SUBTRACTION,
     DIVISION,
-    MODULE,
-    SQROOT,
+    MULTIPLICATION
 };
 enum Control
 {
-    CE,
-    OFF,
-    MRC,
-    MPLUS,
-    MMINUS,
+    CLEAR,
+    RESET
 };
 
 class Display
 {
 public:
-    void add(Digit digit)
-    {
-        switch (digit)
-        {
-        case ZERO:
-            cout << "#####\n#   #\n#   #\n#   #\n#   #\n#   #\n#####";
-            break;
-        case ONE:
-            cout << "    #\n    #\n    #\n    #\n    #\n    #\n    #";
-            break;
-        case TWO:
-            cout << "#####\n    #\n    #\n#####\n#    \n#    \n#####";
-            break;
-        case THREE:
-            cout << "#####\n    #\n    #\n#####\n    #\n    #\n#####";
-            break;
-        case FOUR:
-            cout << "#   #\n#   #\n#   #\n#####\n    #\n    #\n    #";
-            break;
-        case FIVE:
-            cout << "#####\n#    \n#    \n#####\n    #\n    #\n#####";
-            break;
-        case SIX:
-            cout << "#####\n#\n#\n#####\n#   #\n#   #\n#####";
-            break;
-        case SEVEN:
-            cout << "#####\n    #\n    #\n    #\n    #\n    #\n    #";
-            break;
-        case EIGHT:
-            cout << "#####\n#   #\n#   #\n#####\n#   #\n#   #\n#####";
-            break;
-        case NINE:
-            cout << "#####\n#   #\n#   #\n#####\n    #\n    #\n    #";
-            break;
-        }
-    }
-    void clear() {}
+    void add(Digit digit);
+    void clear();
 };
 class KeyOperator : public Key
 {
     Operator operador;
+public:
+    KeyOperator(Operator );
+    void press();
 };
 class KeyDigit : public Key
 {
     Digit digit;
+public:
+    KeyDigit(Digit );
+    void press();
 };
-class KeyOperator : public Key
+class KeyControl : public Key
 {
     Control controle;
+public:
+    KeyControl(Control );
+    void press();
 };
 class Key
 {
+protected:
     Keyboard *keyboard;
-    Digit digito;
-
 public:
-    Key(Digit d) : digito(d) {}
-    // void press()
-    //{
-    //     Key::keyboard->receiveDigit(this->digito);
-    // }
-    virtual void press() //= 0;
-    {
-        Key::keyboard->receiveDigit(this->digito);
-    }
-    void setKeyboard(Keyboard *keyboard)
-    {
-        Key::keyboard = keyboard;
-    }
+    virtual void press() = 0;
+    void setKeyboard(Keyboard* );
+};
+
+class KeyDigit: public Key{
+     Digit digit;
+   public:
+      KeyDigit(Digit );
+      void press();
 };
 
 class Keyboard
@@ -112,23 +76,27 @@ class Keyboard
     CPU *cpu;
 
 public:
-    void addKey(Key *key)
-    {
-        this->keys[this->KeysCount++] = key;
-        key->setKeyboard(this);
-    }
+    void setCpu(CPU );
+
+    void addKey(Key *key);
+    void receiveDigit(Digit );
+    void receiveOperator(Operator );
+    void receiveControl(Control );
 };
 
 class CPU
 {
     Display *visor;
     Digit digito;
+    Operator operador;
+    Control controle;
 
 public:
-    void soma(Digit) {}
-    void subtrai() {}
-    void divite() {}
-    void multiplica() {}
+    void setDisplay(Display* );
+    void receiveDigit(Digit );
+    void receiveOperator(Operator );
+    void receiveControl(Control );
+    get(Digit);
 };
 
 class Calculator
@@ -137,12 +105,3 @@ class Calculator
     Keyboard *keyboard;
     CPU *cpu;
 };
-
-int main()
-{
-    Keyboard k1;
-    Key key0(ZERO), key1(ONE);
-
-    k1.addKey(&key0);
-    k1.addKey(&key1);
-}
