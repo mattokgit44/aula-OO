@@ -22,6 +22,8 @@ void Display::clear(){
     std::cout << std::endl;
 }
 void CPU::receiveDigit(Digit digit){
+    
+
     this->visor?this->visor->add(digit):void();
 }
 

@@ -77,7 +77,6 @@ class Keyboard
 
 public:
     void setCpu(CPU );
-
     void addKey(Key *key);
     void receiveDigit(Digit );
     void receiveOperator(Operator );
@@ -96,7 +95,7 @@ public:
     void receiveDigit(Digit );
     void receiveOperator(Operator );
     void receiveControl(Control );
-    get(Digit);
+    
 };
 
 class Calculator
