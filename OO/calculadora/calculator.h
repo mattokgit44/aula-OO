@@ -70,7 +70,10 @@ public:
             break;
         }
     }
-    void clear() {}
+    void clear()
+    {
+        cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    }
 };
 class KeyOperator : public Key
 {
@@ -95,6 +98,10 @@ public:
     //{
     //     Key::keyboard->receiveDigit(this->digito);
     // }
+    int receiveDigit(Digit digito)
+    {
+        Key::keyboard->addKey(Keyboard::keys);
+    }
     virtual void press() //= 0;
     {
         Key::keyboard->receiveDigit(this->digito);
@@ -107,9 +114,9 @@ public:
 
 class Keyboard
 {
-    Key *keys[200];
     int KeysCount;
     CPU *cpu;
+    Key *keys[200];
 
 public:
     void addKey(Key *key)
@@ -125,7 +132,14 @@ class CPU
     Digit digito;
 
 public:
-    void soma(Digit) {}
+    void soma(Digit)
+    {
+        Digit resu;
+        int a = Key::press;
+        int b = Key::press;
+        a + b = resu;
+        visor->add(resu);
+    }
     void subtrai() {}
     void divite() {}
     void multiplica() {}
