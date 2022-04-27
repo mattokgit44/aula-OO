@@ -1,26 +1,20 @@
 #include "FelipeMartinsSanchescalculator.h"
 #include <iostream>
 
-void Keyboard::addKey(Key *key)
+void Keyboard::receiveDigit(Digit n)
 {
-  this->keys[this->KeysCount++] = key;
-  key->setKeyboard(this);
-};
 
-void Keyboard::setCpu(CPU)
-{
-  Keyboard::cpu = cpu;
-};
+  this->cpu->receiveDigit(n);
+}
 
-void Keyboard::receiveDigit(Digit digit)
+void Keyboard::receiveOperation(Operation op)
 {
-  this->cpu ? this->cpu->receiveDigit(digit) : void();
-};
-void Keyboard::receiveOperation(Operation operation)
-{
-  this->cpu ? this->cpu->receiveOperation(operation) : void();
-};
+
+  this->cpu->receiveOperation(op);
+}
+
 void Keyboard::receiveControl(Control control)
 {
-  this->cpu ? this->cpu->receiveControl(control) : void();
-};
+
+  this->cpu->receiveControl(control);
+}

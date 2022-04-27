@@ -1,25 +1,24 @@
 #include "FelipeMartinsSanchescalculator.h"
 #include <iostream>
 
-void Key::setKeyboard(Keyboard *)
+//*****************************Implemtação Key******************************************************
+void Key::setReceiver(Receiver *r)
 {
-  Key::keyboard = keyboard;
-};
-
-KeyDigit::KeyDigit(Digit d) : digit(d) {}
+  this->receiver = r;
+}
+//*****************************Implemtação KeyDigit******************************************************
 void KeyDigit::press()
 {
-  this->keyboard->receiveDigit(this->digit);
+  this->receiver->receiveDigit(this->digit);
 }
 
-KeyOperation::KeyOperation(Operation o) : operation(o) {}
+//*****************************Implemtação KeyOperation**************************************************
 void KeyOperation::press()
 {
-  this->keyboard->receiveOperation(this->operation);
+  this->receiver->receiveOperation(this->operation);
 }
-
-KeyControl::KeyControl(Control c) : control(c) {}
+//*****************************Implemtação KeyControl****************************************************
 void KeyControl::press()
 {
-  this->keyboard->receiveControl(this->control);
+  this->receiver->receiveControl(this->control);
 }

@@ -1,18 +1,20 @@
+#include <iostream>
+#include <math.h>
 #include "FelipeMartinsSanchescalculator.h"
+
+using namespace std;
 
 int main()
 {
-  Keyboard k1;
-  KeyDigit key0(ZERO), key1(ONE), key2(TWO);
+  Cpu calculadora;
+  Keyboard Keyboard;
 
-  k1.addKeyD(&key0);
-  k1.addKeyD(&key1);
-  k1.addKeyD(&key2);
+  // calculadora.receiveDigit(ONE);
+  // calculadora.receiveDigit(TWO);
+  // calculadora.receiveOperation(ADDITION);
+  // calculadora.receiveDigit(ONE);
+  // calculadora.receiveDigit(FIVE);
+  // calculadora.receiveControl(EQUAL);
 
-  key1.press();
-  key1.press();
-  key1.press();
-  key0.press();
-
-  return 1;
+  cout << pow(10, -1);
 }

@@ -1,46 +1,107 @@
 #include "FelipeMartinsSanchescalculator.h"
 #include <iostream>
-
-void Display::add(Digit digit)
+#include <math.h>
+using namespace std;
+// imprimi os digitos na tela
+Digit convertToDigit(int n)
 {
-  switch (digit)
+  switch (n)
   {
-  case ZERO:
-    std::cout << 0;
+  case 0:
+    return ZERO;
     break;
-  case ONE:
-    std::cout << 1;
+  case 1:
+    return ONE;
     break;
-  case TWO:
-    std::cout << 2;
+  case 2:
+    return TWO;
     break;
-  case THREE:
-    std::cout << 3;
+  case 3:
+    return THRE;
     break;
-  case FOUR:
-    std::cout << 4;
+  case 4:
+    return FOUR;
     break;
-  case FIVE:
-    std::cout << 5;
+  case 5:
+    return FIVE;
     break;
-  case SIX:
-    std::cout << 6;
+  case 6:
+    return SIX;
     break;
-  case SEVEN:
-    std::cout << 7;
+  case 7:
+    return SEVEN;
     break;
-  case EIGHT:
-    std::cout << 8;
+  case 8:
+    return EIGHT;
     break;
-  case NINE:
-    std::cout << 9;
+  case 9:
+    return NINE;
     break;
+
   default:
-    std::cout << 'E';
+    cout << "MATH ERROR";
+    break;
   }
 }
 
+void Display::add(Digit number)
+{
+  switch (number)
+  {
+  case ZERO:
+    cout << 0;
+    break;
+  case ONE:
+    cout << 1;
+    break;
+  case TWO:
+    cout << 2;
+    break;
+  case THRE:
+    cout << 2;
+    break;
+  case FOUR:
+    cout << 2;
+    break;
+  case FIVE:
+    cout << 2;
+    break;
+  case SIX:
+    cout << 2;
+    break;
+  case SEVEN:
+    cout << 2;
+    break;
+  case EIGHT:
+    cout << 2;
+    break;
+  case NINE:
+    cout << 2;
+    break;
+
+  default:
+    setError();
+    break;
+  }
+}
+
+// imprimi um Decimal Separator
+void Display::setDecimalSeparator()
+{
+  cout << ".";
+}
+
+// Imprimi um error no console
+void Display::setError()
+{
+  cout << "MATH-ERROR";
+}
+// imprimi um sinal na tela
+void Display::setSignal(Signal)
+{
+  cout << "-";
+}
 void Display::clear()
 {
-  std::cout << std::endl;
+  cout << std::endl;
 }

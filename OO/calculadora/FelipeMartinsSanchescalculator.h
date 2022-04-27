@@ -1,11 +1,9 @@
-#include <iostream>
-using namespace std;
 enum Digit
 {
     ZERO,
     ONE,
     TWO,
-    THREE,
+    THRE,
     FOUR,
     FIVE,
     SIX,
@@ -15,23 +13,103 @@ enum Digit
 };
 enum Operation
 {
-    SUM,
+    ADDITION,
     SUBTRACTION,
     DIVISION,
-    MULTIPLICATION
+    MULTIPLICATION,
+    SQUARE_ROOT,
+    PERCENTAGE
 };
 enum Control
 {
     CLEAR,
-    RESET
+    RESET,
+    DECIMAL_SEPARATOR,
+    MEMORY_READ_CLEAR,
+    MEMORY_ADDITION,
+    MEMORY_SUBTRACTION,
+    EQUAL
+};
+enum Signal
+{
+    POSITIVE,
+    NEGATIVE
 };
 
 class Display
 {
+    Digit convertToDigit(int);
+
 public:
-    void add(Digit digit);
+    void add(Digit);
+    void setDecimalSeparator();
+    void setSignal(Signal);
+    void setError();
     void clear();
 };
+
+class Receiver
+{
+public:
+    virtual void receiveDigit(Digit) = 0;
+    virtual void receiveOperation(Operation) = 0;
+    virtual void receiveControl(Control) = 0;
+};
+class Cpu : public Receiver
+{
+    Display *display;
+    Operation operation;
+    Signal Signal = POSITIVE;
+    int operator1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int operator2[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int quant_operation = 0;
+    int quant_digits1 = 0;
+    int quant_digits2 = 0;
+    int escopo1 = 0;
+    int escopo2 = 0;
+
+public:
+    void setDisplay(Display *);
+    void receiveDigit(Digit);
+    void receiveOperation(Operation);
+    void receiveControl(Control);
+};
+
+class Key; // Preset for early reference
+
+class Calculator
+{
+public:
+    void setDisplay(Display *);
+    void setCpu(Cpu *);
+    void setKeyboard(Keyboard *);
+};
+
+// Keybord vai receber os comandos
+class Keyboard : public Receiver
+{
+    Cpu *cpu;
+
+public:
+    void setCpu(Cpu *);
+
+    void addKey(Key *);
+
+    void receiveDigit(Digit);
+    void receiveOperation(Operation);
+    void receiveControl(Control);
+};
+class Key
+{
+protected:
+    Receiver *receiver;
+
+public:
+    void setReceiver(Receiver *);
+
+    void press();
+};
+
 class KeyDigit : public Key
 {
     Digit digit;
@@ -57,50 +135,4 @@ class KeyControl : public Key
 public:
     KeyControl(Control);
     void press();
-};
-class Key
-{
-protected:
-    Keyboard *keyboard;
-
-public:
-    virtual void press() = 0;
-    void setKeyboard(Keyboard *);
-};
-class Keyboard
-{
-    Key *keys[200];
-    int KeysCount;
-
-protected:
-    CPU *cpu;
-
-public:
-    void setCpu(CPU);
-    void addKey(Key *key);
-    void addKeyD(KeyDigit *key);
-    void receiveDigit(Digit);
-    void receiveOperation(Operation);
-    void receiveControl(Control);
-};
-
-class CPU
-{
-    Display *visor;
-    Digit digito;
-    Operation operador;
-    Control controle;
-
-public:
-    void setDisplay(Display *);
-    void receiveDigit(Digit);
-    void receiveOperation(Operation);
-    void receiveControl(Control);
-};
-
-class Calculator
-{
-    Display *visor;
-    Keyboard *keyboard;
-    CPU *cpu;
 };
