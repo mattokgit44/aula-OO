@@ -107,7 +107,32 @@ void Cpu::receiveOperation(Operation op)
   {
     this->operation = op;
     this->quant_operation++;
-    cout << "\n";
+    cout << "\n\n";
+  }
+
+  if (op == ADDITION)
+  {
+    cout << "+\n\n";
+  }
+  if (op == SUBTRACTION)
+  {
+    cout << "-\n\n";
+  }
+  if (op == DIVISION)
+  {
+    cout << "/\n\n";
+  }
+  if (op == MULTIPLICATION)
+  {
+    cout << "X\n\n";
+  }
+  if (op == SQUARE_ROOT)
+  {
+    cout << "Raiz\n\n";
+  }
+  if (op == PERCENTAGE)
+  {
+    cout << "%\n\n";
   }
 }
 
@@ -195,6 +220,11 @@ void Cpu::receiveControl(Control control)
     if (this->operation == PERCENTAGE)
     {
       res = (number1 / 100) * number2;
+    }
+
+    if (this->operation == SQUARE_ROOT)
+    {
+      res = sqrt(number1);
     }
 
     this->quant_operation = 0;
