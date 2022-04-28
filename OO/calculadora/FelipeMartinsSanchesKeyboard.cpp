@@ -1,4 +1,4 @@
-#include "FelipeMartinsSanchescalculator.h"
+#include "calculator.h"
 #include <iostream>
 using namespace std;
 void Keyboard::receiveDigit(Digit n)

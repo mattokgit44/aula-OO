@@ -1,6 +1,6 @@
 #include <iostream>
 #include <math.h>
-#include "FelipeMartinsSanchescalculator.h"
+#include "calculator.h"
 
 using namespace std;
 
