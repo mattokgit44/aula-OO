@@ -12,6 +12,14 @@ void Cpu::receiveDigit(Digit number)
     // cout<<"entrou";
     switch (number)
     {
+      if (this->quant_decimal_separator1 == 0)
+      {
+        this->quant_digits1++;
+      }
+      else
+      {
+        this->escopo1--;
+      }
     case ZERO:
       this->operator1[this->quant_digits1] = 0;
       break;
@@ -45,10 +53,9 @@ void Cpu::receiveDigit(Digit number)
 
     default:
       this->display->setError();
+
       break;
     }
-
-    this->quant_digits1++;
   }
 
   if (this->quant_operation != 0)
@@ -91,7 +98,15 @@ void Cpu::receiveDigit(Digit number)
       break;
     }
 
-    this->quant_digits2++;
+    if (this->quant_decimal_separator2 == 0)
+    {
+      this->quant_digits2++;
+    }
+    else
+    {
+      this->quant_digits2++;
+      this->escopo2--;
+    }
   }
 }
 
@@ -116,16 +131,12 @@ void Cpu::receiveControl(Control control)
 
   if (control == DECIMAL_SEPARATOR)
   {
-    this->display->setDecimalSeparator();
     if (this->quant_operation == 0)
-    {
-      this->quant_digits1 = 0;
-      this->escopo1 = (this->quant_digits1 + 1) * (-1);
-    }
+      this->quant_decimal_separator1++;
     else
     {
-      this->quant_digits2 = 0;
-      this->escopo2 = (this->quant_digits1 + 1) * (-1);
+      this->quant_decimal_separator2++;
+      this->quant_digits1ds = quant_digits1ds;
     }
   }
 
@@ -135,9 +146,10 @@ void Cpu::receiveControl(Control control)
     float res = 0;
     // Transforma o numero em decimal por meio de multiplicacao da base 10
     float number1 = 0;
-    for (int i = this->quant_digits1; i >= this->escopo1; i--)
+    for (int i = 0; i <= this->quant_digits1 - 1; i++)
     {
-      number1 = number1 + this->operator1[i] * pow(10, i);
+      while (int j = quant_digits1ds - 1 >= escopo1)
+        number1 = number1 + this->operator1[i] * pow(10, j);
     }
     cout << number1 << "\n";
 
@@ -168,34 +180,40 @@ void Cpu::receiveControl(Control control)
       res = number1 * numeber2;
     }
 
+    if (this->operation == PERCENTAGE)
+    {
+      res = (number1 / 100) * numeber2;
+    }
+
     this->quant_operation = 0;
     this->quant_digits1 = 0;
     this->quant_digits2 = 0;
 
+    // imprimi o resultado
     cout << res;
-
-    // traz os numeros de resultado pra frente da virgula e imprimi
-    int mult = pow(10, (*(-1)));
-    int p_res = res + mult;
-    int expo = 0;
-    int div = 10;
-    while (p_res != 0)
-    {
-
-      if (k == 0)
-      {
-        this->display->setDecimalSeparator();
-      }
-      this->display->add(convertToDigit(p_res % div));
-      p_res /= 10;
-      k++;
-    }
+    // guarda resultado num temporario
+    this->resultado = res;
   }
 
   if (control == CLEAR)
   {
     this->quant_operation = 0;
-    this->quant_digits1 = 0;
-    this->quant_digits2 = 0;
+    this->quant_digits1 = -1;
+    this->quant_digits2 = -1;
+    this->escopo1 = 0;
+    this->escopo2 = 0;
+    this->resultado = 0;
+  }
+
+  if (control == RESET)
+  {
+    this->quant_operation = 0;
+    this->quant_digits1 = -1;
+    this->quant_digits2 = -1;
+    this->quant_decimal_separator1 = 0;
+    this->quant_decimal_separator2 = 0;
+    this->escopo1 = 0;
+    this->escopo2 = 0;
+    this->resultado = 0;
   }
 }

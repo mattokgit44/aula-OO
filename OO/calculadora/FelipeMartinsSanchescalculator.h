@@ -63,10 +63,14 @@ class Cpu : public Receiver
     int operator1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     int operator2[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     int quant_operation = 0;
+    int quant_decimal_separator1 = 0;
+    int quant_decimal_separator2 = 0;
+    int quant_digits1ds = 0;
     int quant_digits1 = 0;
     int quant_digits2 = 0;
     int escopo1 = 0;
     int escopo2 = 0;
+    float resultado = 0;
 
 public:
     void setDisplay(Display *);
