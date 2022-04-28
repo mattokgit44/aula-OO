@@ -107,7 +107,7 @@ void Cpu::receiveOperation(Operation op)
   {
     this->operation = op;
     this->quant_operation++;
-    cout << "\n\n";
+    cout << "\n";
   }
 
   if (op == ADDITION)

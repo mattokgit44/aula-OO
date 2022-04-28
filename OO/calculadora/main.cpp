@@ -13,33 +13,40 @@ int main()
   KeyControl keyEqual(EQUAL), KeyClear(CLEAR), KeyDecimalSeparator(DECIMAL_SEPARATOR), KeyReset(RESET);
   KeyOperation keyADD(ADDITION), keySUB(SUBTRACTION), keyDIV(DIVISION), keyMULT(MULTIPLICATION), keyPERCE(PERCENTAGE), keySQR(SQUARE_ROOT);
 
-  keyEqual.setReceiver(&k1);
-  KeyClear.setReceiver(&k1);
-  KeyDecimalSeparator.setReceiver(&k1);
-  KeyReset.setReceiver(&k1);
+  k1.addKey(&keyEqual);
+  k1.addKey(&KeyClear);
+  k1.addKey(&KeyDecimalSeparator);
+  k1.addKey(&KeyReset);
 
-  keyADD.setReceiver(&k1);
-  keySUB.setReceiver(&k1);
-  keyDIV.setReceiver(&k1);
-  keyMULT.setReceiver(&k1);
-  keyPERCE.setReceiver(&k1);
-  keySQR.setReceiver(&k1);
+  k1.addKey(&keyADD);
+  k1.addKey(&keySUB);
+  k1.addKey(&keyDIV);
+  k1.addKey(&keyMULT);
+  k1.addKey(&keyPERCE);
+  k1.addKey(&keySQR);
 
-  key0.setReceiver(&k1);
-  key1.setReceiver(&k1);
-  key2.setReceiver(&k1);
-  key3.setReceiver(&k1);
-  key4.setReceiver(&k1);
-  key5.setReceiver(&k1);
-  key6.setReceiver(&k1);
-  key7.setReceiver(&k1);
-  key8.setReceiver(&k1);
-  key9.setReceiver(&k1);
+  k1.addKey(&key0);
+  k1.addKey(&key1);
+  k1.addKey(&key2);
+  k1.addKey(&key3);
+  k1.addKey(&key4);
+  k1.addKey(&key5);
+  k1.addKey(&key6);
+  k1.addKey(&key7);
+  k1.addKey(&key8);
+  k1.addKey(&key9);
+
 
   key1.press();
   key2.press();
+  KeyDecimalSeparator.press();
+  key3.press();
+  key4.press();
   keyADD.press();
   key1.press();
+  key4.press();
+  KeyDecimalSeparator.press();
+  key6.press();
   keyEqual.press();
 
   // calculadora.receiveDigit(ONE);

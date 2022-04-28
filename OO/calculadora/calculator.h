@@ -87,6 +87,8 @@ class Key; // Preset for early reference
 class Keyboard : public Receiver
 {
     Cpu *cpu;
+    Key * keys[110];
+    char keysCount = 0;
 
 public:
     void setCpu(Cpu *);

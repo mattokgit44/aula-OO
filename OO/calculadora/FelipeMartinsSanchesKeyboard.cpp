@@ -7,6 +7,11 @@ void Keyboard::receiveDigit(Digit n)
   this->cpu->receiveDigit(n);
 }
 
+void Keyboard::addKey(Key * k){
+  this->keys[this->keysCount++] = k;
+  k->setReceiver(this);
+}
+
 void Keyboard::setCpu(Cpu *cpu)
 {
   this->cpu = cpu;
