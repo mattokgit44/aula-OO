@@ -42,6 +42,7 @@ class Display
 
 public:
     void add(Digit);
+    void add(Control);
     void setDecimalSeparator();
     void setSignal(Signal);
     void setError();
@@ -59,17 +60,17 @@ class Cpu : public Receiver
 {
     Display *display;
     Operation operation;
-    Signal Signal = POSITIVE;
+    Signal signal = POSITIVE;
     int operator1[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     int operator2[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int sinal = 1;
     int quant_operation = 0;
-    int quant_decimal_separator1 = 0;
-    int quant_decimal_separator2 = 0;
-    int quant_digits1ds = 0;
     int quant_digits1 = 0;
     int quant_digits2 = 0;
-    int escopo1 = 0;
-    int escopo2 = 0;
+    int index_decimal1 = 0;
+    int index_decimal2 = 0;
+    int flagDec1 = 0;
+    int flagDec2 = 0;
     float resultado = 0;
 
 public:
@@ -77,17 +78,10 @@ public:
     void receiveDigit(Digit);
     void receiveOperation(Operation);
     void receiveControl(Control);
+    void receiveSignal(Signal);
 };
 
 class Key; // Preset for early reference
-
-class Calculator
-{
-public:
-    void setDisplay(Display *);
-    void setCpu(Cpu *);
-    void setKeyboard(Keyboard *);
-};
 
 // Keybord vai receber os comandos
 class Keyboard : public Receiver
@@ -103,6 +97,15 @@ public:
     void receiveOperation(Operation);
     void receiveControl(Control);
 };
+
+class Calculator
+{
+public:
+    void setDisplay(Display *);
+    void setCpu(Cpu *);
+    void setKeyboard(Keyboard *);
+};
+
 class Key
 {
 protected:

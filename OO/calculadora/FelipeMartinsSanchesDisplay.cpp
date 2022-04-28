@@ -58,31 +58,45 @@ void Display::add(Digit number)
     cout << 2;
     break;
   case THRE:
-    cout << 2;
+    cout << 3;
     break;
   case FOUR:
-    cout << 2;
+    cout << 4;
     break;
   case FIVE:
-    cout << 2;
+    cout << 5;
     break;
   case SIX:
-    cout << 2;
+    cout << 6;
     break;
   case SEVEN:
-    cout << 2;
+    cout << 7;
     break;
   case EIGHT:
-    cout << 2;
+    cout << 8;
     break;
   case NINE:
-    cout << 2;
+    cout << 9;
     break;
 
   default:
     setError();
     break;
   }
+  cout << "\n";
+}
+
+void Display::add(Control ctrl)
+{
+  switch (ctrl)
+  {
+  case DECIMAL_SEPARATOR:
+    cout << ".";
+    break;
+  default:
+    break;
+  }
+  cout << "\n";
 }
 
 // imprimi um Decimal Separator

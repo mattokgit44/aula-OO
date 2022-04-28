@@ -6,7 +6,6 @@ using namespace std;
 
 int main()
 {
-  Cpu calculadora;
   Keyboard Keyboard;
 
   // calculadora.receiveDigit(ONE);
@@ -15,6 +14,16 @@ int main()
   // calculadora.receiveDigit(ONE);
   // calculadora.receiveDigit(FIVE);
   // calculadora.receiveControl(EQUAL);
-
-  cout << pow(10, -1);
+  Cpu calc;
+  calc.receiveSignal(NEGATIVE);
+  calc.receiveDigit(ONE);
+  calc.receiveDigit(TWO);
+  calc.receiveControl(DECIMAL_SEPARATOR);
+  calc.receiveDigit(THRE);
+  calc.receiveDigit(FOUR);
+  calc.receiveOperation(ADDITION);
+  calc.receiveDigit(TWO);
+  calc.receiveDigit(ZERO);
+  calc.receiveControl(EQUAL);
+  return 0;
 }
