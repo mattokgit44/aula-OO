@@ -1,4 +1,4 @@
-#include "guilhermeCalculator.h"
+#include "felipeCalculator.h"
 #include <iostream>
 #include <math.h>
 using namespace std;

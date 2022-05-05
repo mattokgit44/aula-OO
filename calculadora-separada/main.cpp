@@ -1,7 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include "calculator.h"
-#include "guilhermeCalculator.h"
+#include "felipeCalculator.h"
 
 using namespace std;
 

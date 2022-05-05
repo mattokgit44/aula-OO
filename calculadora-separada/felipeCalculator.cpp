@@ -1,4 +1,4 @@
-#include "guilhermeCalculator.h"
+#include "felipeCalculator.h"
 
 void guilherme_Calculator::setDisplay(Display *disp){
     this->display = disp;
